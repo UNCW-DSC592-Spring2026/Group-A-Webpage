@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metrics — App Review Rating Prediction</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav">
+    <span class="nav-brand">App Review Rating Prediction System</span>
+    <div class="nav-links">
+      <a href="index.html">Overview</a>
+      <a href="system.html">The System</a>
+      <a href="plan.html">Project Plan</a>
+      <a href="risk.html">Risk</a>
+      <a href="time.html">Time & Effort</a>
+      <a href="metrics.html" class="active">Metrics</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-tag">Metrics</div>
+    <h1>Model performance</h1>
+    <p>This page tracks how well the system predicts app review ratings — from the initial baseline through each improved model iteration. Results will populate as experiments are completed in Phase 3.</p>
+  </div>
+
+  <!-- STATUS BANNER -->
+  <div class="metrics-hero">
+    <div class="metrics-hero-orb"></div>
+    <h2>Phase 3 experiments underway</h2>
+    <p>The baseline Azure ML pipeline has been reproduced. Preprocessing experiments and alternative model testing are currently in progress — results will appear here as each experiment completes.</p>
+    <div class="metrics-status">
+      <div class="metrics-status-dot"></div>
+      <div class="metrics-status-text">Construction phase · actively updating</div>
+    </div>
+  </div>
+
+  <!-- HEADLINE METRIC CARDS -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Baseline accuracy</div>
+      <div class="metric-val metric-val--placeholder">Pending</div>
+      <div class="metric-sub">Reproduced from original Azure ML pipeline</div>
+      <span class="metric-phase mp-active">Phase 3 — in progress</span>
+    </div>
+    <div class="metric-card metric-card--pending">
+      <div class="metric-label">Best model accuracy</div>
+      <div class="metric-val metric-val--placeholder">—</div>
+      <div class="metric-sub">Best result across all experiments</div>
+      <span class="metric-phase mp-soon">Coming in Phase 3</span>
+    </div>
+    <div class="metric-card metric-card--pending">
+      <div class="metric-label">Improvement over baseline</div>
+      <div class="metric-val metric-val--placeholder">—</div>
+      <div class="metric-sub">Accuracy gain from best model vs. baseline</div>
+      <span class="metric-phase mp-soon">Coming in Phase 3</span>
+    </div>
+  </div>
+
+  <!-- EXPERIMENT TABLE -->
+  <div class="metrics-table-wrap">
+    <div class="sec-label">Experiment log</div>
+    <h3>Model comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Preprocessing</th>
+          <th>Accuracy</th>
+          <th>F1 Score</th>
+          <th>MAE</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="model-name">Baseline</span></td>
+          <td>Original pipeline</td>
+          <td class="pending-cell">pending</td>
+          <td class="pending-cell">pending</td>
+          <td class="pending-cell">pending</td>
+          <td><span class="metric-phase mp-active">In progress</span></td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Preprocessing v1</span></td>
+          <td>+ Stopword removal</td>
+          <td class="pending-cell">—</td>
+          <td class="pending-cell">—</td>
+          <td class="pending-cell">—</td>
+          <td><span class="metric-phase mp-soon">Upcoming</span></td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Preprocessing v2</span></td>
+          <td>+ N-gram features</td>
+          <td class="pending-cell">—</td>
+          <td class="pending-cell">—</td>
+          <td class="pending-cell">—</td>
+          <td><span class="metric-phase mp-soon">Upcoming</span></td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Alt. model</span></td>
+          <td>TBD</td>
+          <td class="pending-cell">—</td>
+          <td class="pending-cell">—</td>
+          <td class="pending-cell">—</td>
+          <td><span class="metric-phase mp-soon">Upcoming</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EDA PLACEHOLDER -->
+  <div class="coming-soon">
+    <div class="coming-icon">&#9641;</div>
+    <h3>EDA findings</h3>
+    <p>Dataset statistics, rating distributions, review length analysis, and key patterns discovered during exploratory data analysis will appear here once the EDA notebook is complete.</p>
+    <span class="coming-phase coming-phase--active">Phase 3 — in progress</span>
+  </div>
+
+  <!-- FINAL MODEL PLACEHOLDER -->
+  <div class="coming-soon">
+    <div class="coming-icon">&#9873;</div>
+    <h3>Final registered model</h3>
+    <p>The production-ready model registered in Azure ML, along with full evaluation results, will be documented here at the end of Phase 4.</p>
+    <span class="coming-phase coming-phase--upcoming">Phase 4 — upcoming</span>
+  </div>
+
+  <footer class="foot">
+    <img src="contents/logo.png" alt="UNC Wilmington" class="foot-logo">
+    <p>App Review Rating Prediction System · University of North Carolina Wilmington</p>
+    <span>DSC592 Software Engineering for Data Science · Spring 2025</span>
+  </footer>
+
+</div>
+</body>
+</html>

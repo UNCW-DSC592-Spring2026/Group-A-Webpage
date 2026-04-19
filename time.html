@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time & Effort — App Review Rating Prediction</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav">
+    <span class="nav-brand">App Review Rating Prediction System</span>
+    <div class="nav-links">
+      <a href="index.html">Overview</a>
+      <a href="system.html">The System</a>
+      <a href="plan.html">Project Plan</a>
+      <a href="risk.html">Risk</a>
+      <a href="time.html" class="active">Time</a>
+      <a href="metrics.html">Metrics</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-tag">Time</div>
+    <h1>Team hours log</h1>
+    <p>Estimated and actual hours logged per team member each week. Updated as the project progresses through each phase.</p>
+  </div>
+
+  <!-- PER-PERSON SUMMARY CARDS -->
+  <div class="summary-grid">
+    <div class="person-card">
+      <div class="person-av av-t">BR</div>
+      <div class="person-name">Brandon</div>
+      <div class="person-role">Project lead & architecture</div>
+      <div class="hour-row"><span class="hour-label">Est. total</span><span class="hour-val">TBD</span></div>
+      <div class="hour-row"><span class="hour-label">Actual so far</span><span class="hour-val pending">logging</span></div>
+      <div class="mini-bar-wrap"><div class="mini-bar" style="width:30%;"></div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-av av-g">BT</div>
+      <div class="person-name">Brent</div>
+      <div class="person-role">UX & documentation</div>
+      <div class="hour-row"><span class="hour-label">Est. total</span><span class="hour-val">TBD</span></div>
+      <div class="hour-row"><span class="hour-label">Actual so far</span><span class="hour-val pending">logging</span></div>
+      <div class="mini-bar-wrap"><div class="mini-bar" style="width:30%;"></div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-av av-b">FH</div>
+      <div class="person-name">Farhart</div>
+      <div class="person-role">ML engineering</div>
+      <div class="hour-row"><span class="hour-label">Est. total</span><span class="hour-val">TBD</span></div>
+      <div class="hour-row"><span class="hour-label">Actual so far</span><span class="hour-val pending">logging</span></div>
+      <div class="mini-bar-wrap"><div class="mini-bar" style="width:30%;"></div></div>
+    </div>
+  </div>
+
+  <!-- PHASE TOTALS TABLE -->
+  <div class="totals-wrap">
+    <div class="sec-label">Hours by phase</div>
+    <h3>Estimated vs actual — all phases</h3>
+    <table class="tot-table">
+      <thead>
+        <tr>
+          <th>Team member</th>
+          <th>Phase 1 est.</th>
+          <th>Phase 1 act.</th>
+          <th>Phase 2 est.</th>
+          <th>Phase 2 act.</th>
+          <th>Phase 3 est.</th>
+          <th>Phase 3 act.</th>
+          <th>Phase 4 est.</th>
+          <th>Phase 4 act.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name-cell">Brandon</td>
+          <td class="est-cell">—</td><td class="pend-cell">—</td>
+          <td class="est-cell">—</td><td class="pend-cell">—</td>
+          <td class="est-cell">—</td><td class="pend-cell">logging</td>
+          <td class="pend-cell">—</td><td class="pend-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">Brent</td>
+          <td class="est-cell">—</td><td class="pend-cell">—</td>
+          <td class="est-cell">—</td><td class="pend-cell">—</td>
+          <td class="est-cell">—</td><td class="pend-cell">logging</td>
+          <td class="pend-cell">—</td><td class="pend-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">Farhart</td>
+          <td class="est-cell">—</td><td class="pend-cell">—</td>
+          <td class="est-cell">—</td><td class="pend-cell">—</td>
+          <td class="est-cell">—</td><td class="pend-cell">logging</td>
+          <td class="pend-cell">—</td><td class="pend-cell">—</td>
+        </tr>
+        <tr class="totals-row">
+          <td class="name-cell">Team total</td>
+          <td class="est-cell">—</td><td class="pend-cell">—</td>
+          <td class="est-cell">—</td><td class="pend-cell">—</td>
+          <td class="est-cell">—</td><td class="pend-cell">logging</td>
+          <td class="pend-cell">—</td><td class="pend-cell">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WEEKLY LOG -->
+  <div class="sec-label" style="margin-bottom:1rem;">Weekly log</div>
+
+  <!-- Phases 1 & 2 — complete -->
+  <div class="week-wrap">
+    <div class="week-header">
+      <span class="week-title">Phases 1 & 2 — Inception & Elaboration</span>
+      <span class="week-badge wb-done">Complete</span>
+    </div>
+    <div class="week-body">
+      <div class="week-cols">
+        <div>
+          <div class="week-col-label">Accomplished</div>
+          <div class="task-row"><div class="task-dot"></div>Vision document drafted and reviewed</div>
+          <div class="task-row"><div class="task-dot"></div>Stakeholder personas and requirements documented</div>
+          <div class="task-row"><div class="task-dot"></div>Context and component diagrams produced</div>
+          <div class="task-row"><div class="task-dot"></div>Risk register completed</div>
+          <div class="task-row"><div class="task-dot"></div>Project webpage launched</div>
+        </div>
+        <div>
+          <div class="week-col-label">Hours summary</div>
+          <!-- Replace — with actual hours once available -->
+          <div class="task-row"><div class="task-dot"></div>Brandon: <span class="task-hours">—</span></div>
+          <div class="task-row"><div class="task-dot"></div>Brent: <span class="task-hours">—</span></div>
+          <div class="task-row"><div class="task-dot"></div>Farhart: <span class="task-hours">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 3 Week 1 — active -->
+  <div class="week-wrap week-wrap--active">
+    <div class="week-header">
+      <span class="week-title">Phase 3 — Week 1</span>
+      <span class="week-badge wb-active">In progress</span>
+    </div>
+    <div class="week-body">
+      <div class="week-cols">
+        <div>
+          <div class="week-col-label">Accomplished this week</div>
+          <!-- Update with real tasks each week -->
+          <div class="task-row"><div class="task-dot task-dot--gold"></div>Baseline Azure ML pipeline reproduced</div>
+          <div class="task-row"><div class="task-dot task-dot--gold"></div>EDA notebook started — initial data exploration underway</div>
+          <div class="task-row"><div class="task-dot task-dot--gold"></div>Project webpage updated with system and plan pages</div>
+        </div>
+        <div>
+          <div class="week-col-label">Planned for next week</div>
+          <div class="task-row"><div class="task-dot"></div>Complete EDA notebook and document findings</div>
+          <div class="task-row"><div class="task-dot"></div>Begin preprocessing experiments (stopword removal, n-grams)</div>
+          <div class="task-row"><div class="task-dot"></div>Update metrics page with baseline results</div>
+        </div>
+      </div>
+      <div class="week-hours">
+        <!-- Replace — with est / act hours e.g. "3 est / 2.5 act" -->
+        <div class="wh-item"><span class="wh-val">— / —</span>Brandon (est. / act.)</div>
+        <div class="wh-item"><span class="wh-val">— / —</span>Brent (est. / act.)</div>
+        <div class="wh-item"><span class="wh-val">— / —</span>Farhart (est. / act.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 3 Week 2 — upcoming -->
+  <div class="week-wrap week-wrap--upcoming">
+    <div class="week-header">
+      <span class="week-title">Phase 3 — Week 2</span>
+      <span class="week-badge wb-upcoming">Upcoming</span>
+    </div>
+    <div class="week-placeholder">This week's log will be filled in as work progresses.</div>
+  </div>
+
+  <!-- Phase 3 Week 3 — upcoming -->
+  <div class="week-wrap week-wrap--upcoming">
+    <div class="week-header">
+      <span class="week-title">Phase 3 — Week 3</span>
+      <span class="week-badge wb-upcoming">Upcoming</span>
+    </div>
+    <div class="week-placeholder">This week's log will be filled in as work progresses.</div>
+  </div>
+
+  <!-- Phase 4 — upcoming -->
+  <div class="week-wrap week-wrap--upcoming" style="opacity:0.45;">
+    <div class="week-header">
+      <span class="week-title">Phase 4 — Transition</span>
+      <span class="week-badge wb-upcoming">Upcoming</span>
+    </div>
+    <div class="week-placeholder">Phase 4 log will begin once Construction is complete.</div>
+  </div>
+
+  <footer class="foot">
+    <img src="contents/logo.png" alt="UNC Wilmington" class="foot-logo">
+    <p>App Review Rating Prediction System · University of North Carolina Wilmington</p>
+    <span>DSC592 Software Engineering for Data Science · Spring 2025</span>
+  </footer>
+
+</div>
+</body>
+</html>
