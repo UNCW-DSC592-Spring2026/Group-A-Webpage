@@ -27,7 +27,7 @@
   <div class="page-header">
     <div class="page-tag">Metrics</div>
     <h1>Model performance & EDA findings</h1>
-    <p>Results from Phase 3 experimentation — baseline reproduction, exploratory data analysis, and model comparison across five approaches. LightGBM emerged as the strongest performer.</p>
+    <p>Results from Phase 3 experimentation — baseline reproduction, exploratory data analysis, and model comparison across six approaches. LightGBM emerged as the strongest performer.</p>
   </div>
 
   <!-- HEADLINE METRIC CARDS -->
@@ -46,7 +46,7 @@
     </div>
     <div class="metric-card">
       <div class="metric-label">Best model R²</div>
-      <div class="metric-val">0.4344</div>
+      <div class="metric-val">0.4544</div>
       <div class="metric-sub">LightGBM — highest variance explained</div>
       <span class="metric-badge mb-best">LightGBM</span>
     </div>
@@ -82,7 +82,7 @@
           <td><span class="val-bad">0.2653</span></td>
           <td><span class="val-bad">-0.0319</span></td>
           <td>0.2049</td>
-          <td>Negative R² — fails to capture text structure</td>
+          <td>Negative R² — fails to capture nonlinear text structure</td>
         </tr>
         <tr>
           <td><span class="model-name">Decision forest</span></td>
@@ -90,7 +90,7 @@
           <td><span class="val-mid">0.2525</span></td>
           <td><span class="val-mid">0.0653</span></td>
           <td>0.1858</td>
-          <td>Moderate nonlinear improvement over baseline</td>
+          <td>Captures limited nonlinearity; constrained by feature representation</td>
         </tr>
         <tr>
           <td><span class="model-name">Boosted decision tree</span></td>
@@ -98,7 +98,15 @@
           <td><span class="val-mid">0.2481</span></td>
           <td><span class="val-mid">0.0976</span></td>
           <td>0.1935</td>
-          <td>Best tree-based pipeline result</td>
+          <td>Incremental gain from boosting; still limited by pipeline features</td>
+        </tr>
+        <tr class="highlight-row">
+          <td><span class="model-name">N-gram feature extraction <span class="insight-pill">Key experiment</span></span></td>
+          <td><span class="method-pill mp-pipeline">Pipeline</span></td>
+          <td><span class="val-mid">0.2050</span></td>
+          <td><span class="val-good">0.3850</span></td>
+          <td>0.1520</td>
+          <td>Major jump — structured text features matter more than model choice</td>
         </tr>
         <tr>
           <td><span class="model-name">XGBoost</span></td>
@@ -106,15 +114,15 @@
           <td><span class="val-mid">0.2066</span></td>
           <td><span class="val-good">0.3925</span></td>
           <td>0.1442</td>
-          <td>Strong gradient boosting performance</td>
+          <td>Strong gradient boosting with automated feature pipeline</td>
         </tr>
         <tr class="best-row">
           <td><span class="model-name">LightGBM <span class="best-pill">Best</span></span></td>
           <td><span class="method-pill mp-automl">AutoML</span></td>
           <td><span class="val-good">0.1958</span></td>
-          <td><span class="val-good">0.4344</span></td>
+          <td><span class="val-good">0.4544</span></td>
           <td><span class="val-good">0.1366</span></td>
-          <td>Lowest RMSE &amp; MAE, highest R² across all models</td>
+          <td>Lowest RMSE &amp; MAE, highest R² — best candidate for system integration</td>
         </tr>
       </tbody>
     </table>
@@ -122,8 +130,34 @@
 
   <!-- KEY FINDING CALLOUT -->
   <div class="callout">
-    <h4>Key finding</h4>
-    <p>Model performance improves substantially as we move from linear to tree-based to gradient-boosting methods. The base linear regression model performs the worst, with a negative R² indicating it fails to capture meaningful structure in the data. LightGBM achieves the lowest RMSE (0.1958) and MAE (0.1366) and the highest R² (0.4344) — making it the strongest model for this prediction task. Further preprocessing experimentation may improve performance further.</p>
+    <h4>Key finding — feature representation dominates model selection</h4>
+    <p>The most significant insight from Phase 3 is that feature representation has a greater impact on performance than model choice alone. The N-gram experiment — pairing explicit text features with linear regression — achieved an R² of ~0.385, outperforming both the decision forest and boosted decision tree. Once text is properly structured, advanced models like LightGBM can fully leverage the data. Conversely, even sophisticated algorithms underperform when paired with limited preprocessing.</p>
+  </div>
+
+  <!-- PERFORMANCE HIERARCHY -->
+  <div class="hierarchy-card">
+    <div class="sec-label">Performance hierarchy</div>
+    <h2>How models progressed across Phase 3</h2>
+    <p class="hierarchy-desc">Three distinct tiers emerged — each reflecting a different combination of model complexity and feature richness.</p>
+    <div class="hierarchy-tiers">
+      <div class="tier tier--low">
+        <div class="tier-label">Tier 1 — Baseline</div>
+        <div class="tier-models">Linear Regression</div>
+        <div class="tier-note">Negative R² — predicts toward mean, unable to model text structure</div>
+      </div>
+      <div class="tier-arrow">→</div>
+      <div class="tier tier--mid">
+        <div class="tier-label">Tier 2 — Pipeline models</div>
+        <div class="tier-models">Decision Forest · Boosted Decision Tree · N-gram + Linear</div>
+        <div class="tier-note">Incremental gains; N-gram experiment showed feature engineering is the key lever</div>
+      </div>
+      <div class="tier-arrow">→</div>
+      <div class="tier tier--best">
+        <div class="tier-label">Tier 3 — AutoML</div>
+        <div class="tier-models">XGBoost · LightGBM</div>
+        <div class="tier-note">Substantial gains through combined automated feature engineering and gradient boosting</div>
+      </div>
+    </div>
   </div>
 
   <!-- AZURE BASELINE PIPELINE -->
@@ -217,6 +251,15 @@
       <div class="cleaning-item"><div class="cleaning-dot"></div>Review dates parsed and converted to datetime</div>
       <div class="cleaning-item"><div class="cleaning-dot"></div>Review length feature engineered from raw text</div>
       <div class="cleaning-item"><div class="cleaning-dot"></div>Sentiment and priority scores derived from reviewer ratings</div>
+    </div>
+  </div>
+
+  <!-- EXPERIMENT 3 NOTE -->
+  <div class="exp3-note">
+    <div class="exp3-icon">⚠</div>
+    <div>
+      <div class="exp3-title">Experiment 3 — Review substance filtering (tooling constraint)</div>
+      <p>Experiment 3 evaluated the impact of filtering low-substance reviews based on textual length. Azure ML Designer does not support dynamic string-length filtering within this pipeline. Prior data analysis showed that very short reviews dominate the dataset and contribute limited semantic signal. In production, these reviews would be filtered prior to preprocessing to improve model stability and interpretability. Feature-level constraints served as a practical proxy, highlighting the importance of system-level design decisions when tooling imposes limitations.</p>
     </div>
   </div>
 
