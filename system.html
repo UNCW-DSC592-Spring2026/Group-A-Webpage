@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The System — App Review Rating Prediction</title>
   <link rel="stylesheet" href="css/shared.css">
+  <style>
+    .diagram-svg { height: auto; }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -27,11 +30,13 @@
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="page-tag">The System</div>
-    <h1>Architecture & design</h1>
+    <h1>Architecture &amp; design</h1>
     <p>How the App Review Rating Prediction System is structured, how data flows through it, and how its components interact to deliver nightly intelligence to your team.</p>
   </div>
 
-  <!-- CONTEXT DIAGRAM -->
+  <!-- ═══════════════════════════════════════════════
+       CONTEXT DIAGRAM (existing)
+  ════════════════════════════════════════════════ -->
   <div class="diagram-frame">
     <div class="sec-label">System context</div>
     <h2>Context diagram</h2>
@@ -46,45 +51,30 @@
           <path d="M0,0 L6,3 L0,6 Z" fill="#c8962a"/>
         </marker>
       </defs>
-
-      <!-- Dataset -->
       <rect x="20" y="115" width="130" height="50" rx="4" fill="none" stroke="#5a8a8a" stroke-width="1.2"/>
       <text x="85" y="136" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a0c8c8">App Review</text>
       <text x="85" y="151" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a0c8c8">Dataset</text>
-
-      <!-- Arrow to system -->
       <line x1="150" y1="140" x2="230" y2="140" stroke="#5a8a8a" stroke-width="1" marker-end="url(#arr)"/>
       <text x="190" y="133" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6aacac">Raw Reviews</text>
       <text x="190" y="144" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6aacac">&amp; Ratings</text>
-
-      <!-- Central system -->
       <rect x="230" y="100" width="150" height="80" rx="4" fill="#0f3333" stroke="#1d9e75" stroke-width="1.5"/>
       <text x="305" y="133" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#9fe1cb">App Review Rating</text>
       <text x="305" y="149" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#9fe1cb">Prediction System</text>
-
-      <!-- Azure ML -->
       <rect x="530" y="60" width="150" height="50" rx="4" fill="none" stroke="#5a8a8a" stroke-width="1.2"/>
       <text x="605" y="81" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a0c8c8">Azure Machine</text>
       <text x="605" y="97" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a0c8c8">Learning</text>
-
       <line x1="380" y1="118" x2="530" y2="88" stroke="#5a8a8a" stroke-width="1" marker-end="url(#arr)"/>
       <text x="455" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6aacac">Training &amp; Scoring Jobs</text>
       <line x1="530" y1="100" x2="380" y2="130" stroke="#5a8a8a" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
       <text x="452" y="126" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6aacac">Predictions &amp; Metrics</text>
-
-      <!-- Feedback loop -->
       <path d="M380 140 Q480 185 530 110" stroke="#c8962a" stroke-width="1.2" stroke-dasharray="5,3" fill="none" marker-end="url(#arrgold)"/>
       <text x="490" y="172" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#c8962a">Historical Data</text>
       <text x="490" y="183" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#c8962a">&amp; Outcomes</text>
-
-      <!-- Quality Analyst -->
       <rect x="530" y="155" width="150" height="50" rx="4" fill="none" stroke="#5a8a8a" stroke-width="1.2"/>
       <text x="605" y="176" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a0c8c8">Quality Analyst /</text>
       <text x="605" y="192" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a0c8c8">Customer Success</text>
       <line x1="380" y1="155" x2="530" y2="178" stroke="#5a8a8a" stroke-width="1" marker-end="url(#arr)"/>
       <text x="455" y="160" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6aacac">Dashboards &amp; Insights</text>
-
-      <!-- Management -->
       <rect x="530" y="240" width="150" height="50" rx="4" fill="none" stroke="#5a8a8a" stroke-width="1.2"/>
       <text x="605" y="261" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a0c8c8">Management &amp;</text>
       <text x="605" y="277" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a0c8c8">Executives</text>
@@ -98,162 +88,387 @@
     </div>
   </div>
 
-  <!-- COMPONENT DIAGRAM -->
+  <!-- ═══════════════════════════════════════════════
+       DETAILED COMPONENT DIAGRAM  (Image 1)
+  ════════════════════════════════════════════════ -->
   <div class="diagram-frame">
-    <div class="sec-label">Component diagram</div>
-    <h2>Internal data flow</h2>
-    <p class="diagram-desc">The component diagram shows how raw app reviews flow through the system's internal stages — from nightly ingestion and categorization through text cleaning, ML modeling, and final dashboard delivery — with credential-based access control at both storage and visualization layers.</p>
+    <div class="sec-label">Class diagram</div>
+    <h2>Class diagram</h2>
+    <p class="diagram-desc">Shows every component in the system, the data it handles, and how control passes between layers — from the nightly trigger through to the secured dashboard output.</p>
 
-    <svg viewBox="0 0 820 620" xmlns="http://www.w3.org/2000/svg" class="diagram-svg diagram-svg--light">
+    <svg viewBox="0 0 780 920" xmlns="http://www.w3.org/2000/svg" class="diagram-svg diagram-svg--light">
       <defs>
-        <marker id="arrd" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-          <path d="M0,0 L6,3 L0,6 Z" fill="#006666"/>
+        <marker id="ca" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#555"/>
         </marker>
-        <marker id="arrd2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-          <path d="M0,0 L6,3 L0,6 Z" fill="#006666"/>
+        <marker id="ca-dash" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#888"/>
+        </marker>
+        <marker id="ca-gold" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#b07a10"/>
         </marker>
       </defs>
 
-      <!-- ── ROW 1: Nightly Refresh → Review Scraper → Raw Review Data ── -->
-      <rect x="10" y="18" width="110" height="36" rx="4" fill="none" stroke="#006666" stroke-width="1.2"/>
-      <text x="65" y="40" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Nightly Refresh</text>
+      <!-- ── colour helpers ─────────────────────────────
+           purple  = data ingestion  #6c63c9 / #ede9f8
+           teal    = processing      #006666 / #e0f0ef
+           orange  = monitoring      #b07a10 / #fdf3de
+           salmon  = ML/labeling     #c05040 / #fae8e4
+           blue    = output/UI       #2a6fad / #e5eef8
+           grey    = infrastructure  #555    / #f2f2f2
+      ─────────────────────────────────────────────── -->
 
-      <line x1="120" y1="36" x2="155" y2="36" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="136" y="30" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Sends Signal</text>
+      <!-- ══ ROW 1: NightlyRefresh → ReviewScrapper → RawReviewData ══ -->
+      <!-- NightlyRefresh (grey/infrastructure) -->
+      <rect x="20" y="28" width="130" height="52" rx="8" fill="#f2f2f2" stroke="#888" stroke-width="1.4"/>
+      <text x="85" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#333">NightlyRefresh</text>
+      <text x="85" y="63" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#666">Scheduled trigger</text>
 
-      <rect x="155" y="18" width="110" height="36" rx="4" fill="none" stroke="#006666" stroke-width="1.2"/>
-      <text x="210" y="40" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Review Scraper</text>
+      <line x1="150" y1="54" x2="195" y2="54" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="172" y="47" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">signals</text>
 
-      <line x1="265" y1="36" x2="310" y2="36" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="284" y="30" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Scraped Reviews</text>
+      <!-- ReviewScrapper (purple) -->
+      <rect x="195" y="28" width="145" height="52" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.6"/>
+      <text x="267" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#3d2d9e">ReviewScrapper</text>
+      <text x="267" y="63" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a4faa">Collects raw reviews</text>
 
-      <rect x="310" y="18" width="120" height="36" rx="4" fill="#e0f0ef" stroke="#006666" stroke-width="1.5"/>
-      <text x="370" y="40" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666" font-weight="500">Raw Review Data</text>
+      <line x1="340" y1="54" x2="385" y2="54" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="362" y="47" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">outputs</text>
 
-      <!-- Outage Detection top-right -->
-      <rect x="620" y="18" width="120" height="36" rx="4" fill="none" stroke="#006666" stroke-width="1.2"/>
-      <text x="680" y="40" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Outage Detection</text>
+      <!-- RawReviewData (purple) -->
+      <rect x="385" y="28" width="155" height="52" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.6"/>
+      <text x="462" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#3d2d9e">RawReviewData</text>
+      <text x="462" y="63" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a4faa">Stores scraped reviews</text>
 
-      <!-- Predictive Review Model -->
-      <rect x="610" y="110" width="130" height="44" rx="4" fill="none" stroke="#c8962a" stroke-width="1.2"/>
-      <text x="675" y="129" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c8962a">Predictive Review</text>
-      <text x="675" y="143" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c8962a">Model</text>
+      <!-- raw reviews arrow down from RawReviewData -->
+      <line x1="462" y1="80" x2="462" y2="118" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="470" y="102" font-family="DM Sans,sans-serif" font-size="9" fill="#777">raw reviews</text>
 
-      <!-- Outage → Predictive Model -->
-      <line x1="680" y1="54" x2="680" y2="110" stroke="#c8962a" stroke-width="1" marker-end="url(#arrd2)"/>
-      <text x="686" y="86" font-family="DM Sans,sans-serif" font-size="8" fill="#c8962a">Outage Detected</text>
+      <!-- ── RawReviewData → OutageDetection (right branch) ── -->
+      <line x1="540" y1="54" x2="610" y2="54" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
 
-      <!-- ── ROW 2: Raw Data → Review Categorization ← Predictive Model ── -->
-      <line x1="370" y1="54" x2="370" y2="108" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="378" y="84" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Raw Reviews</text>
+      <!-- OutageDetection (orange) -->
+      <rect x="610" y="28" width="148" height="52" rx="8" fill="#fdf3de" stroke="#b07a10" stroke-width="1.6"/>
+      <text x="684" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7a5200">OutageDetection</text>
+      <text x="684" y="63" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#9a6800">Detects service outages</text>
 
-      <rect x="300" y="108" width="130" height="44" rx="4" fill="#e0f0ef" stroke="#006666" stroke-width="1.5"/>
-      <text x="365" y="127" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666" font-weight="500">Review</text>
-      <text x="365" y="141" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666" font-weight="500">Categorization</text>
+      <!-- OutageDetection → triggers → PredictiveReview -->
+      <line x1="684" y1="80" x2="684" y2="178" stroke="#b07a10" stroke-width="1.3" marker-end="url(#ca-gold)"/>
+      <text x="692" y="132" font-family="DM Sans,sans-serif" font-size="9" fill="#9a6800">triggers</text>
 
-      <!-- Predictive Model → Review Categorization -->
-      <line x1="610" y1="132" x2="430" y2="132" stroke="#c8962a" stroke-width="1" marker-end="url(#arrd2)"/>
-      <text x="518" y="126" font-family="DM Sans,sans-serif" font-size="8" fill="#c8962a">Review Prediction</text>
+      <!-- ══ ROW 2: ReviewCategorization + PredictiveReview ══ -->
+      <!-- ReviewCategorization (teal/processing) -->
+      <rect x="330" y="118" width="165" height="52" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.6"/>
+      <text x="412" y="138" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#004444">ReviewCategorization</text>
+      <text x="412" y="153" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Labels review by type</text>
 
-      <!-- ── ROW 3: Data Splitting ── -->
-      <line x1="365" y1="152" x2="365" y2="196" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
+      <!-- PredictiveReview (orange) -->
+      <rect x="610" y="178" width="148" height="52" rx="8" fill="#fdf3de" stroke="#b07a10" stroke-width="1.6"/>
+      <text x="684" y="198" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7a5200">PredictiveReview</text>
+      <text x="684" y="213" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#9a6800">Predicts review category</text>
 
-      <rect x="300" y="196" width="130" height="36" rx="4" fill="none" stroke="#006666" stroke-width="1.2"/>
-      <text x="365" y="218" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Data Splitting</text>
+      <!-- PredictiveReview → predicts → ReviewCategorization -->
+      <line x1="610" y1="204" x2="495" y2="152" stroke="#b07a10" stroke-width="1.3" marker-end="url(#ca-gold)"/>
+      <text x="558" y="168" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#9a6800">predicts</text>
 
-      <!-- Split left: Review w/ Substance -->
-      <line x1="300" y1="214" x2="220" y2="268" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="232" y="248" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Review w/</text>
-      <text x="232" y="258" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Substance</text>
+      <!-- ReviewCategorization → DataSplitting -->
+      <line x1="412" y1="170" x2="412" y2="248" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
 
-      <!-- Split right: Review w/out Substance -->
-      <line x1="430" y1="214" x2="510" y2="268" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="448" y="248" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Review w/out</text>
-      <text x="448" y="258" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Substance</text>
+      <!-- ══ ROW 3: DataSplitting ══ -->
+      <rect x="330" y="248" width="165" height="52" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.6"/>
+      <text x="412" y="268" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#004444">DataSplitting</text>
+      <text x="412" y="284" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Splits by substance</text>
 
-      <!-- ── ROW 4: Text Cleaning & Normalization ── -->
-      <rect x="300" y="268" width="130" height="44" rx="4" fill="#e0f0ef" stroke="#006666" stroke-width="1.5"/>
-      <text x="365" y="287" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666" font-weight="500">Text Cleaning</text>
-      <text x="365" y="301" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666" font-weight="500">&amp; Normalization</text>
+      <!-- DataSplitting left branch: w/ substance -->
+      <line x1="370" y1="300" x2="280" y2="360" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="298" y="330" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">w/ substance</text>
 
-      <!-- Left branch → Text Cleaning -->
-      <line x1="220" y1="268" x2="300" y2="285" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <!-- Right branch → Text Cleaning -->
-      <line x1="510" y1="268" x2="430" y2="285" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
+      <!-- DataSplitting right branch: w/out substance -->
+      <line x1="455" y1="300" x2="545" y2="360" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="527" y="330" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">w/out substance</text>
 
-      <!-- Processed Data label (invisible path helper) -->
-      <line x1="365" y1="312" x2="365" y2="358" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="373" y="338" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Processed Data</text>
+      <!-- ══ ROW 4: TextCleaning ══ -->
+      <rect x="330" y="358" width="165" height="52" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.6"/>
+      <text x="412" y="378" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#004444">TextCleaning</text>
+      <text x="412" y="393" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Cleans &amp; normalizes text</text>
 
-      <!-- ── ROW 5: Sentiment & Topic Labeler ── -->
-      <rect x="290" y="358" width="150" height="50" rx="4" fill="#e0f0ef" stroke="#006666" stroke-width="1.5"/>
-      <text x="365" y="378" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666" font-weight="500">Sentiment &amp;</text>
-      <text x="365" y="392" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666" font-weight="500">Topic Labeler</text>
+      <!-- Both branches converge into TextCleaning -->
+      <line x1="280" y1="360" x2="345" y2="380" stroke="#555" stroke-width="1.1"/>
+      <line x1="545" y1="360" x2="480" y2="380" stroke="#555" stroke-width="1.1"/>
 
-      <!-- Processed Data → On-site Storage -->
-      <line x1="440" y1="383" x2="540" y2="383" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="483" y="376" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Processed Data</text>
+      <!-- TextCleaning → SentimentTopicLabeler -->
+      <line x1="412" y1="410" x2="412" y2="468" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="420" y="442" font-family="DM Sans,sans-serif" font-size="9" fill="#777">processed</text>
 
-      <rect x="540" y="363" width="110" height="40" rx="4" fill="none" stroke="#006666" stroke-width="1.2"/>
-      <text x="595" y="387" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">On-Site Storage</text>
+      <!-- ══ ROW 5: SentimentTopicLabeler + OnSiteStorage + TechnicianAuth ══ -->
+      <rect x="280" y="468" width="170" height="52" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.6"/>
+      <text x="365" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7a2010">SentimentTopicLabeler</text>
+      <text x="365" y="503" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c05040">Labels sentiment &amp; topics</text>
 
-      <!-- Credential Authenticator (storage) -->
-      <line x1="650" y1="383" x2="695" y2="383" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="666" y="377" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Access</text>
-      <rect x="695" y="363" width="110" height="40" rx="4" fill="none" stroke="#006666" stroke-width="1.2"/>
-      <text x="750" y="379" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Credential</text>
-      <text x="750" y="393" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Authenticator</text>
+      <!-- SentimentTopicLabeler → stores → OnSiteStorage -->
+      <line x1="450" y1="494" x2="510" y2="494" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="480" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">stores</text>
 
-      <!-- Processed Data down to ML Pipeline -->
-      <line x1="365" y1="408" x2="365" y2="450" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="373" y="432" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Processed Data</text>
+      <rect x="510" y="468" width="120" height="52" rx="8" fill="#f2f2f2" stroke="#888" stroke-width="1.4"/>
+      <text x="570" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#333">OnSiteStorage</text>
+      <text x="570" y="503" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#666">Persists data locally</text>
 
-      <!-- ── ROW 6: ML Pipeline ── -->
-      <rect x="300" y="450" width="130" height="40" rx="4" fill="#e0f0ef" stroke="#006666" stroke-width="1.5"/>
-      <text x="365" y="474" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666" font-weight="500">ML Pipeline</text>
+      <!-- OnSiteStorage → grants access → TechnicianAuth -->
+      <line x1="630" y1="494" x2="660" y2="494" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="645" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#777">grants access</text>
 
-      <line x1="365" y1="490" x2="365" y2="530" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="373" y="513" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">ML Results</text>
+      <rect x="660" y="468" width="100" height="52" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.4"/>
+      <text x="710" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#7a2010">TechnicianAuth</text>
+      <text x="710" y="503" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#c05040">Technician access</text>
 
-      <!-- Labeled Data arc from Sentiment Labeler down to Dashboard -->
-      <path d="M290 383 Q200 383 200 560 Q200 570 230 570" stroke="#006666" stroke-width="1" fill="none" stroke-dasharray="4,3" marker-end="url(#arrd)"/>
-      <text x="192" y="480" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Labeled</text>
-      <text x="192" y="490" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Data</text>
+      <!-- SentimentTopicLabeler → processed → MLPipeline -->
+      <line x1="365" y1="520" x2="365" y2="578" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="373" y="552" font-family="DM Sans,sans-serif" font-size="9" fill="#777">processed</text>
 
-      <!-- ── ROW 7: Dashboard ── -->
-      <rect x="300" y="530" width="130" height="40" rx="4" fill="#e0f0ef" stroke="#006666" stroke-width="1.5"/>
-      <text x="365" y="554" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666" font-weight="500">Dashboard</text>
+      <!-- ══ ROW 6: MLPipeline ══ -->
+      <rect x="280" y="578" width="170" height="52" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.6"/>
+      <text x="365" y="598" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7a2010">MLPipeline</text>
+      <text x="365" y="613" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c05040">Runs ML model training</text>
 
-      <!-- Dashboard → Visualization -->
-      <line x1="430" y1="550" x2="540" y2="550" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="467" y="540" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Modeling Results</text>
-      <text x="467" y="550" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">&amp; Labeled Data</text>
+      <!-- MLPipeline → ML results → Dashboard -->
+      <line x1="365" y1="630" x2="365" y2="698" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="373" y="667" font-family="DM Sans,sans-serif" font-size="9" fill="#777">ML results</text>
 
-      <rect x="540" y="530" width="110" height="40" rx="4" fill="none" stroke="#006666" stroke-width="1.2"/>
-      <text x="595" y="546" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Visualization</text>
-      <text x="595" y="560" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">&amp; Dashboard</text>
+      <!-- Labeled data dashed line from SentimentTopicLabeler down to Dashboard (left side) -->
+      <line x1="280" y1="494" x2="180" y2="494" stroke="#888" stroke-width="1.1" stroke-dasharray="5,3"/>
+      <line x1="180" y1="494" x2="180" y2="724" stroke="#888" stroke-width="1.1" stroke-dasharray="5,3"/>
+      <line x1="180" y1="724" x2="280" y2="724" stroke="#888" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#ca-dash)"/>
+      <text x="148" y="620" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888" transform="rotate(-90,148,620)">labeled data</text>
 
-      <!-- Credential Authenticator (dashboard) -->
-      <line x1="650" y1="550" x2="695" y2="550" stroke="#006666" stroke-width="1" marker-end="url(#arrd)"/>
-      <text x="666" y="544" font-family="DM Sans,sans-serif" font-size="8" fill="#4a8a8a">Access</text>
-      <rect x="695" y="530" width="110" height="40" rx="4" fill="none" stroke="#006666" stroke-width="1.2"/>
-      <text x="750" y="546" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Credential</text>
-      <text x="750" y="560" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Authenticator</text>
+      <!-- ══ ROW 7: Dashboard + Visualization + UserAuthenticator ══ -->
+      <rect x="280" y="698" width="170" height="52" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.6"/>
+      <text x="365" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#0f3d7a">Dashboard</text>
+      <text x="365" y="733" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#2a6fad">Displays results &amp; labels</text>
 
+      <!-- Dashboard → feeds → Visualization -->
+      <line x1="450" y1="724" x2="510" y2="724" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="480" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">feeds</text>
+
+      <rect x="510" y="698" width="120" height="52" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.6"/>
+      <text x="570" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#0f3d7a">Visualization</text>
+      <text x="570" y="733" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#2a6fad">Filters &amp; displays</text>
+
+      <!-- Visualization ← grants access ← UserAuthenticator -->
+      <line x1="660" y1="724" x2="630" y2="724" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <text x="645" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#777">grants access</text>
+
+      <rect x="660" y="698" width="100" height="52" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.4"/>
+      <text x="710" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#0f3d7a">UserAuthenticator</text>
+      <text x="710" y="733" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#2a6fad">User access</text>
+
+      <!-- ══ LEGEND ══ -->
+      <rect x="20" y="830" width="740" height="70" rx="6" fill="#fafafa" stroke="#dde" stroke-width="1"/>
+      <!-- Data ingestion -->
+      <rect x="36" y="851" width="14" height="14" rx="3" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.2"/>
+      <text x="56" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Data ingestion</text>
+      <!-- Processing -->
+      <rect x="155" y="851" width="14" height="14" rx="3" fill="#e0f0ef" stroke="#006666" stroke-width="1.2"/>
+      <text x="175" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Processing</text>
+      <!-- ML / labeling -->
+      <rect x="260" y="851" width="14" height="14" rx="3" fill="#fae8e4" stroke="#c05040" stroke-width="1.2"/>
+      <text x="280" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">ML / labeling</text>
+      <!-- Output / UI -->
+      <rect x="370" y="851" width="14" height="14" rx="3" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.2"/>
+      <text x="390" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Output / UI</text>
+      <!-- Monitoring -->
+      <rect x="466" y="851" width="14" height="14" rx="3" fill="#fdf3de" stroke="#b07a10" stroke-width="1.2"/>
+      <text x="486" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Monitoring</text>
+      <!-- Infrastructure -->
+      <rect x="564" y="851" width="14" height="14" rx="3" fill="#f2f2f2" stroke="#888" stroke-width="1.2"/>
+      <text x="584" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Infrastructure</text>
     </svg>
+
+    <div class="callout">
+      <h4>Class diagram — internal data flow</h4>
+      <p>Raw app reviews flow through the system's internal stages — from nightly ingestion and outage-aware categorization through text cleaning, ML modeling, and final dashboard delivery — with credential-based access control at both storage and visualization layers.</p>
+    </div>
   </div>
 
-  <!-- COMPONENT BREAKDOWN -->
+  <!-- ═══════════════════════════════════════════════
+       LAYERED ARCHITECTURE DIAGRAM  (Image 2)
+  ════════════════════════════════════════════════ -->
+  <div class="diagram-frame">
+    <div class="sec-label">Component diagram</div>
+    <h2>Component diagram</h2>
+    <p class="diagram-desc">The system is organized into five architectural layers. Each layer has bounded responsibilities and passes data to the next through well-defined interfaces.</p>
+
+    <svg viewBox="0 0 760 900" xmlns="http://www.w3.org/2000/svg" class="diagram-svg diagram-svg--light">
+      <defs>
+        <marker id="la" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#555"/>
+        </marker>
+        <marker id="la-dash" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#999"/>
+        </marker>
+      </defs>
+
+      <!-- ══ LAYER 1: Data ingestion ══ -->
+      <rect x="18" y="16" width="724" height="158" rx="10" fill="none" stroke="#6c63c9" stroke-width="1.8"/>
+      <text x="36" y="40" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#4a3ab0">Data ingestion layer</text>
+
+      <!-- NightlyRefresh -->
+      <rect x="36" y="58" width="140" height="58" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.4"/>
+      <text x="106" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#3d2d9e">NightlyRefresh</text>
+      <text x="106" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#5a4faa">Scheduled trigger</text>
+
+      <line x1="176" y1="87" x2="210" y2="87" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+
+      <!-- ReviewScrapper -->
+      <rect x="210" y="58" width="140" height="58" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.4"/>
+      <text x="280" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#3d2d9e">ReviewScrapper</text>
+      <text x="280" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#5a4faa">Collects raw reviews</text>
+
+      <line x1="350" y1="87" x2="384" y2="87" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+
+      <!-- RawReviewData -->
+      <rect x="384" y="58" width="140" height="58" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.4"/>
+      <text x="454" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#3d2d9e">RawReviewData</text>
+      <text x="454" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#5a4faa">Scraped reviews</text>
+
+      <line x1="524" y1="87" x2="558" y2="87" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+
+      <!-- OutageDetect -->
+      <rect x="558" y="58" width="160" height="58" rx="8" fill="#fdf3de" stroke="#b07a10" stroke-width="1.4"/>
+      <text x="638" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#7a5200">OutageDetect.</text>
+      <text x="638" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#9a6800">Monitors outages</text>
+
+      <!-- ── inter-layer arrows ── -->
+      <!-- raw reviews solid arrow down -->
+      <line x1="380" y1="174" x2="380" y2="214" stroke="#555" stroke-width="1.3" marker-end="url(#la)"/>
+      <text x="388" y="197" font-family="DM Sans,sans-serif" font-size="9" fill="#666">raw reviews</text>
+
+      <!-- triggers prediction dashed arrow -->
+      <line x1="638" y1="174" x2="638" y2="214" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#la-dash)"/>
+      <text x="646" y="197" font-family="DM Sans,sans-serif" font-size="9" fill="#999">triggers prediction</text>
+
+      <!-- ══ LAYER 2: Processing ══ -->
+      <rect x="18" y="214" width="724" height="148" rx="10" fill="none" stroke="#006666" stroke-width="1.8"/>
+      <text x="36" y="238" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#004444">Processing layer</text>
+
+      <!-- PredictiveReview -->
+      <rect x="36" y="254" width="155" height="58" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.4"/>
+      <text x="113" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#004444">PredictiveReview</text>
+      <text x="113" y="291" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#006666">Predicts category</text>
+
+      <line x1="191" y1="283" x2="224" y2="283" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+
+      <!-- ReviewCategor. -->
+      <rect x="224" y="254" width="140" height="58" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.4"/>
+      <text x="294" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#004444">ReviewCategor.</text>
+      <text x="294" y="291" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#006666">Labels by type</text>
+
+      <line x1="364" y1="283" x2="398" y2="283" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+
+      <!-- DataSplitting -->
+      <rect x="398" y="254" width="140" height="58" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.4"/>
+      <text x="468" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#004444">DataSplitting</text>
+      <text x="468" y="291" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#006666">Splits by substance</text>
+
+      <line x1="538" y1="283" x2="572" y2="283" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+
+      <!-- TextCleaning -->
+      <rect x="572" y="254" width="148" height="58" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.4"/>
+      <text x="646" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#004444">TextCleaning</text>
+      <text x="646" y="291" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#006666">Cleans &amp; normalizes</text>
+
+      <!-- processed data arrow down -->
+      <line x1="380" y1="362" x2="380" y2="402" stroke="#555" stroke-width="1.3" marker-end="url(#la)"/>
+      <text x="388" y="385" font-family="DM Sans,sans-serif" font-size="9" fill="#666">processed data</text>
+
+      <!-- ══ LAYER 3: ML & labeling ══ -->
+      <rect x="18" y="402" width="724" height="148" rx="10" fill="none" stroke="#c05040" stroke-width="1.8"/>
+      <text x="36" y="426" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#7a2010">ML &amp; labeling layer</text>
+
+      <!-- SentimentLabeler -->
+      <rect x="140" y="446" width="165" height="58" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.4"/>
+      <text x="222" y="466" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#7a2010">SentimentLabeler</text>
+      <text x="222" y="483" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#c05040">Sentiment &amp; topics</text>
+
+      <line x1="305" y1="475" x2="340" y2="475" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+
+      <!-- MLPipeline -->
+      <rect x="340" y="446" width="155" height="58" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.4"/>
+      <text x="417" y="466" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#7a2010">MLPipeline</text>
+      <text x="417" y="483" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#c05040">Model training</text>
+
+      <!-- ML results arrow -->
+      <line x1="417" y1="504" x2="417" y2="538" stroke="#555" stroke-width="1.1"/>
+      <line x1="380" y1="538" x2="380" y2="562" stroke="#555" stroke-width="1.3" marker-end="url(#la)"/>
+      <line x1="380" y1="538" x2="417" y2="538" stroke="#555" stroke-width="1.1"/>
+      <text x="430" y="525" font-family="DM Sans,sans-serif" font-size="9" fill="#666">ML results</text>
+
+      <!-- labeled data dashed left side -->
+      <line x1="140" y1="475" x2="80" y2="475" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3"/>
+      <line x1="80" y1="475" x2="80" y2="588" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3"/>
+      <line x1="80" y1="588" x2="130" y2="588" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#la-dash)"/>
+      <text x="56" y="535" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#999" transform="rotate(-90,56,535)">labeled data</text>
+
+      <!-- ══ LAYER 4: Output & UI ══ -->
+      <rect x="18" y="562" width="724" height="148" rx="10" fill="none" stroke="#2a6fad" stroke-width="1.8"/>
+      <text x="36" y="586" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#0f3d7a">Output &amp; UI layer</text>
+
+      <!-- Dashboard -->
+      <rect x="130" y="604" width="155" height="58" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.4"/>
+      <text x="207" y="624" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0f3d7a">Dashboard</text>
+      <text x="207" y="641" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#2a6fad">Results &amp; labels</text>
+
+      <line x1="285" y1="633" x2="320" y2="633" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+
+      <!-- Visualization -->
+      <rect x="320" y="604" width="155" height="58" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.4"/>
+      <text x="397" y="624" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0f3d7a">Visualization</text>
+      <text x="397" y="641" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#2a6fad">Filters &amp; displays</text>
+
+      <!-- UserAuthenticator → Visualization -->
+      <line x1="510" y1="633" x2="475" y2="633" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+
+      <!-- UserAuthenticator -->
+      <rect x="510" y="604" width="170" height="58" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.4"/>
+      <text x="595" y="624" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0f3d7a">UserAuthenticator</text>
+      <text x="595" y="641" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#2a6fad">User access</text>
+
+      <!-- dashed down from output layer to infrastructure -->
+      <line x1="380" y1="710" x2="380" y2="730" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#la-dash)"/>
+
+      <!-- ══ LAYER 5: Infrastructure ══ -->
+      <rect x="18" y="730" width="724" height="128" rx="10" fill="none" stroke="#888" stroke-width="1.6"/>
+      <text x="36" y="754" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#444">Infrastructure</text>
+
+      <!-- OnSiteStorage -->
+      <rect x="160" y="768" width="155" height="58" rx="8" fill="#f2f2f2" stroke="#888" stroke-width="1.4"/>
+      <text x="237" y="788" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="600" fill="#333">OnSiteStorage</text>
+      <text x="237" y="805" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#666">Local data store</text>
+
+      <!-- TechnicianAuth -->
+      <rect x="375" y="768" width="155" height="58" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.4"/>
+      <text x="452" y="788" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#7a2010">TechnicianAuth</text>
+      <text x="452" y="805" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#c05040">Technician access</text>
+    </svg>
+
+    <div class="callout">
+      <h4>Component diagram — layer separation</h4>
+      <p>The layered view makes clear how each architectural concern is isolated. Data ingestion handles collection, processing handles cleaning and categorization, the ML layer handles prediction, the UI layer handles presentation, and infrastructure handles persistence and access control.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       COMPONENT BREAKDOWN (existing)
+  ════════════════════════════════════════════════ -->
   <div class="card">
     <div class="sec-label">Key components</div>
     <h2>What each stage does</h2>
     <div class="comp-grid">
-      <div class="comp-card"><div class="comp-num">1</div><h4>Nightly refresh & scraping</h4><p>A scheduled nightly trigger fires the Review Scraper, which collects new app store reviews and feeds them as raw data into the pipeline before the business day begins.</p></div>
+      <div class="comp-card"><div class="comp-num">1</div><h4>Nightly refresh &amp; scraping</h4><p>A scheduled nightly trigger fires the Review Scraper, which collects new app store reviews and feeds them as raw data into the pipeline before the business day begins.</p></div>
       <div class="comp-card"><div class="comp-num">2</div><h4>Review categorization</h4><p>Raw reviews are categorized by type. The Predictive Review Model can also inject predicted reviews triggered by outage detection events, enriching the input set proactively.</p></div>
-      <div class="comp-card"><div class="comp-num">3</div><h4>Data splitting & text cleaning</h4><p>Reviews are split into substantive and non-substantive groups. Both streams pass through text cleaning and normalization — removing noise, stopwords, and inconsistencies.</p></div>
-      <div class="comp-card"><div class="comp-num">4</div><h4>Sentiment & topic labeling</h4><p>Cleaned reviews are labeled with sentiment (positive, negative, neutral) and topic categories. Processed data is simultaneously written to on-site storage via the Credential Authenticator.</p></div>
+      <div class="comp-card"><div class="comp-num">3</div><h4>Data splitting &amp; text cleaning</h4><p>Reviews are split into substantive and non-substantive groups. Both streams pass through text cleaning and normalization — removing noise, stopwords, and inconsistencies.</p></div>
+      <div class="comp-card"><div class="comp-num">4</div><h4>Sentiment &amp; topic labeling</h4><p>Cleaned reviews are labeled with sentiment (positive, negative, neutral) and topic categories. Processed data is simultaneously written to on-site storage via the Credential Authenticator.</p></div>
       <div class="comp-card"><div class="comp-num">5</div><h4>ML pipeline</h4><p>Labeled and processed data flows into the ML pipeline, which generates predicted ratings and model results for each review.</p></div>
-      <div class="comp-card"><div class="comp-num">6</div><h4>Dashboard & access control</h4><p>ML results and labeled data are surfaced through a filterable dashboard and visualization layer, both protected by a Credential Authenticator for secure internal access.</p></div>
+      <div class="comp-card"><div class="comp-num">6</div><h4>Dashboard &amp; access control</h4><p>ML results and labeled data are surfaced through a filterable dashboard and visualization layer, both protected by a Credential Authenticator for secure internal access.</p></div>
     </div>
   </div>
 
