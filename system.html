@@ -96,191 +96,186 @@
     <h2>Class diagram</h2>
     <p class="diagram-desc">Shows every component in the system, the data it handles, and how control passes between layers — from the nightly trigger through to the secured dashboard output.</p>
 
-    <svg viewBox="0 0 780 920" xmlns="http://www.w3.org/2000/svg" class="diagram-svg diagram-svg--light">
+    <svg viewBox="0 0 980 960" xmlns="http://www.w3.org/2000/svg" class="diagram-svg diagram-svg--light">
       <defs>
         <marker id="ca" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
           <path d="M0,0 L7,3.5 L0,7 Z" fill="#555"/>
         </marker>
         <marker id="ca-dash" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-          <path d="M0,0 L7,3.5 L0,7 Z" fill="#888"/>
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#999"/>
         </marker>
         <marker id="ca-gold" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
           <path d="M0,0 L7,3.5 L0,7 Z" fill="#b07a10"/>
         </marker>
       </defs>
 
-      <!-- ── colour helpers ─────────────────────────────
-           purple  = data ingestion  #6c63c9 / #ede9f8
-           teal    = processing      #006666 / #e0f0ef
-           orange  = monitoring      #b07a10 / #fdf3de
-           salmon  = ML/labeling     #c05040 / #fae8e4
-           blue    = output/UI       #2a6fad / #e5eef8
-           grey    = infrastructure  #555    / #f2f2f2
-      ─────────────────────────────────────────────── -->
+      <!-- background -->
+      <rect x="0" y="0" width="980" height="960" fill="#f8f6f2"/>
 
       <!-- ══ ROW 1: NightlyRefresh → ReviewScrapper → RawReviewData ══ -->
-      <!-- NightlyRefresh (grey/infrastructure) -->
-      <rect x="20" y="28" width="130" height="52" rx="8" fill="#f2f2f2" stroke="#888" stroke-width="1.4"/>
-      <text x="85" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#333">NightlyRefresh</text>
-      <text x="85" y="63" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#666">Scheduled trigger</text>
+      <!-- NightlyRefresh (grey) -->
+      <rect x="30" y="30" width="148" height="58" rx="8" fill="#f0f0ee" stroke="#aaa" stroke-width="1.4"/>
+      <text x="104" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#333">NightlyRefresh</text>
+      <text x="104" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#666">Scheduled trigger</text>
 
-      <line x1="150" y1="54" x2="195" y2="54" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="172" y="47" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">signals</text>
+      <line x1="178" y1="59" x2="218" y2="59" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="198" y="52" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888">signals</text>
 
       <!-- ReviewScrapper (purple) -->
-      <rect x="195" y="28" width="145" height="52" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.6"/>
-      <text x="267" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#3d2d9e">ReviewScrapper</text>
-      <text x="267" y="63" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a4faa">Collects raw reviews</text>
+      <rect x="218" y="30" width="160" height="58" rx="8" fill="#eae7f8" stroke="#6c63c9" stroke-width="1.6"/>
+      <text x="298" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#3d2d9e">ReviewScrapper</text>
+      <text x="298" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#5a4faa">Collects raw reviews</text>
 
-      <line x1="340" y1="54" x2="385" y2="54" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="362" y="47" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">outputs</text>
+      <line x1="378" y1="59" x2="418" y2="59" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="398" y="52" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888">outputs</text>
 
       <!-- RawReviewData (purple) -->
-      <rect x="385" y="28" width="155" height="52" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.6"/>
-      <text x="462" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#3d2d9e">RawReviewData</text>
-      <text x="462" y="63" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a4faa">Stores scraped reviews</text>
+      <rect x="418" y="30" width="170" height="58" rx="8" fill="#eae7f8" stroke="#6c63c9" stroke-width="1.6"/>
+      <text x="503" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#3d2d9e">RawReviewData</text>
+      <text x="503" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#5a4faa">Stores scraped reviews</text>
 
-      <!-- raw reviews arrow down from RawReviewData -->
-      <line x1="462" y1="80" x2="462" y2="118" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="470" y="102" font-family="DM Sans,sans-serif" font-size="9" fill="#777">raw reviews</text>
+      <!-- raw reviews arrow: from RawReviewData down + left to ReviewCategorization -->
+      <line x1="503" y1="88" x2="503" y2="130" stroke="#888" stroke-width="1.2"/>
+      <line x1="503" y1="130" x2="348" y2="130" stroke="#888" stroke-width="1.2"/>
+      <line x1="348" y1="130" x2="348" y2="210" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="510" y="112" font-family="DM Sans,sans-serif" font-size="9" fill="#888">raw reviews</text>
 
-      <!-- ── RawReviewData → OutageDetection (right branch) ── -->
-      <line x1="540" y1="54" x2="610" y2="54" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <!-- RawReviewData → OutageDetection (right) -->
+      <line x1="588" y1="59" x2="660" y2="59" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
 
-      <!-- OutageDetection (orange) -->
-      <rect x="610" y="28" width="148" height="52" rx="8" fill="#fdf3de" stroke="#b07a10" stroke-width="1.6"/>
-      <text x="684" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7a5200">OutageDetection</text>
-      <text x="684" y="63" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#9a6800">Detects service outages</text>
+      <!-- OutageDetection (gold/orange) -->
+      <rect x="660" y="30" width="190" height="58" rx="8" fill="#fdf0d0" stroke="#b07a10" stroke-width="1.6"/>
+      <text x="755" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#7a5200">OutageDetection</text>
+      <text x="755" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#9a6800">Detects service outages</text>
 
       <!-- OutageDetection → triggers → PredictiveReview -->
-      <line x1="684" y1="80" x2="684" y2="178" stroke="#b07a10" stroke-width="1.3" marker-end="url(#ca-gold)"/>
-      <text x="692" y="132" font-family="DM Sans,sans-serif" font-size="9" fill="#9a6800">triggers</text>
+      <line x1="755" y1="88" x2="755" y2="210" stroke="#b07a10" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#ca-gold)"/>
+      <text x="762" y="152" font-family="DM Sans,sans-serif" font-size="9" fill="#9a6800">triggers</text>
 
-      <!-- ══ ROW 2: ReviewCategorization + PredictiveReview ══ -->
-      <!-- ReviewCategorization (teal/processing) -->
-      <rect x="330" y="118" width="165" height="52" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.6"/>
-      <text x="412" y="138" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#004444">ReviewCategorization</text>
-      <text x="412" y="153" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Labels review by type</text>
+      <!-- ══ ROW 2: ReviewCategorization ← predicts ← PredictiveReview ══ -->
+      <!-- ReviewCategorization (teal) -->
+      <rect x="218" y="210" width="188" height="58" rx="8" fill="#dceeed" stroke="#006666" stroke-width="1.6"/>
+      <text x="312" y="234" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#004444">ReviewCategorization</text>
+      <text x="312" y="252" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#006666">Labels review by type</text>
 
-      <!-- PredictiveReview (orange) -->
-      <rect x="610" y="178" width="148" height="52" rx="8" fill="#fdf3de" stroke="#b07a10" stroke-width="1.6"/>
-      <text x="684" y="198" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7a5200">PredictiveReview</text>
-      <text x="684" y="213" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#9a6800">Predicts review category</text>
+      <!-- PredictiveReview (gold) -->
+      <rect x="660" y="210" width="190" height="58" rx="8" fill="#fdf0d0" stroke="#b07a10" stroke-width="1.6"/>
+      <text x="755" y="234" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#7a5200">PredictiveReview</text>
+      <text x="755" y="252" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#9a6800">Predicts review category</text>
 
       <!-- PredictiveReview → predicts → ReviewCategorization -->
-      <line x1="610" y1="204" x2="495" y2="152" stroke="#b07a10" stroke-width="1.3" marker-end="url(#ca-gold)"/>
-      <text x="558" y="168" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#9a6800">predicts</text>
+      <line x1="660" y1="239" x2="406" y2="239" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="534" y="232" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888">predicts</text>
 
       <!-- ReviewCategorization → DataSplitting -->
-      <line x1="412" y1="170" x2="412" y2="248" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
+      <line x1="312" y1="268" x2="312" y2="348" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
 
       <!-- ══ ROW 3: DataSplitting ══ -->
-      <rect x="330" y="248" width="165" height="52" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.6"/>
-      <text x="412" y="268" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#004444">DataSplitting</text>
-      <text x="412" y="284" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Splits by substance</text>
+      <rect x="218" y="348" width="188" height="58" rx="8" fill="#dceeed" stroke="#006666" stroke-width="1.6"/>
+      <text x="312" y="372" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#004444">DataSplitting</text>
+      <text x="312" y="390" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#006666">Splits by substance</text>
 
-      <!-- DataSplitting left branch: w/ substance -->
-      <line x1="370" y1="300" x2="280" y2="360" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="298" y="330" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">w/ substance</text>
+      <!-- w/ substance left -->
+      <line x1="270" y1="406" x2="210" y2="468" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="218" y="438" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888">w/ substance</text>
 
-      <!-- DataSplitting right branch: w/out substance -->
-      <line x1="455" y1="300" x2="545" y2="360" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="527" y="330" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">w/out substance</text>
+      <!-- w/out substance right -->
+      <line x1="356" y1="406" x2="416" y2="468" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="408" y="438" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888">w/out substance</text>
 
       <!-- ══ ROW 4: TextCleaning ══ -->
-      <rect x="330" y="358" width="165" height="52" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.6"/>
-      <text x="412" y="378" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#004444">TextCleaning</text>
-      <text x="412" y="393" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#006666">Cleans &amp; normalizes text</text>
+      <rect x="218" y="468" width="188" height="58" rx="8" fill="#dceeed" stroke="#006666" stroke-width="1.6"/>
+      <text x="312" y="492" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#004444">TextCleaning</text>
+      <text x="312" y="510" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#006666">Cleans &amp; normalizes text</text>
 
-      <!-- Both branches converge into TextCleaning -->
-      <line x1="280" y1="360" x2="345" y2="380" stroke="#555" stroke-width="1.1"/>
-      <line x1="545" y1="360" x2="480" y2="380" stroke="#555" stroke-width="1.1"/>
+      <!-- left branch merges in -->
+      <line x1="210" y1="468" x2="230" y2="480" stroke="#888" stroke-width="1.1"/>
+      <!-- right branch merges in -->
+      <line x1="416" y1="468" x2="396" y2="480" stroke="#888" stroke-width="1.1"/>
 
-      <!-- TextCleaning → SentimentTopicLabeler -->
-      <line x1="412" y1="410" x2="412" y2="468" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="420" y="442" font-family="DM Sans,sans-serif" font-size="9" fill="#777">processed</text>
+      <!-- TextCleaning → processed → SentimentTopicLabeler -->
+      <line x1="312" y1="526" x2="312" y2="598" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="320" y="565" font-family="DM Sans,sans-serif" font-size="9" fill="#888">processed</text>
 
       <!-- ══ ROW 5: SentimentTopicLabeler + OnSiteStorage + TechnicianAuth ══ -->
-      <rect x="280" y="468" width="170" height="52" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.6"/>
-      <text x="365" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7a2010">SentimentTopicLabeler</text>
-      <text x="365" y="503" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c05040">Labels sentiment &amp; topics</text>
+      <rect x="188" y="598" width="198" height="58" rx="8" fill="#f5e0dc" stroke="#c05040" stroke-width="1.6"/>
+      <text x="287" y="622" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11.5" font-weight="700" fill="#7a2010">SentimentTopicLabeler</text>
+      <text x="287" y="640" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#c05040">Labels sentiment &amp; topics</text>
 
-      <!-- SentimentTopicLabeler → stores → OnSiteStorage -->
-      <line x1="450" y1="494" x2="510" y2="494" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="480" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">stores</text>
+      <!-- → stores → OnSiteStorage -->
+      <line x1="386" y1="627" x2="450" y2="627" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="418" y="620" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888">stores</text>
 
-      <rect x="510" y="468" width="120" height="52" rx="8" fill="#f2f2f2" stroke="#888" stroke-width="1.4"/>
-      <text x="570" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#333">OnSiteStorage</text>
-      <text x="570" y="503" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#666">Persists data locally</text>
+      <!-- OnSiteStorage (grey) -->
+      <rect x="450" y="598" width="155" height="58" rx="8" fill="#f0f0ee" stroke="#aaa" stroke-width="1.4"/>
+      <text x="527" y="622" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#333">OnSiteStorage</text>
+      <text x="527" y="640" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#666">Persists data locally</text>
 
-      <!-- OnSiteStorage → grants access → TechnicianAuth -->
-      <line x1="630" y1="494" x2="660" y2="494" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="645" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#777">grants access</text>
+      <!-- → grants access → TechnicianAuth -->
+      <line x1="605" y1="627" x2="648" y2="627" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="626" y="620" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#888">grants access</text>
 
-      <rect x="660" y="468" width="100" height="52" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.4"/>
-      <text x="710" y="488" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#7a2010">TechnicianAuth</text>
-      <text x="710" y="503" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#c05040">Technician access</text>
+      <!-- TechnicianAuth (salmon) -->
+      <rect x="648" y="598" width="160" height="58" rx="8" fill="#f5e0dc" stroke="#c05040" stroke-width="1.4"/>
+      <text x="728" y="622" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#7a2010">TechnicianAuth</text>
+      <text x="728" y="640" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#c05040">Technician access</text>
 
       <!-- SentimentTopicLabeler → processed → MLPipeline -->
-      <line x1="365" y1="520" x2="365" y2="578" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="373" y="552" font-family="DM Sans,sans-serif" font-size="9" fill="#777">processed</text>
+      <line x1="287" y1="656" x2="287" y2="728" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="295" y="695" font-family="DM Sans,sans-serif" font-size="9" fill="#888">processed</text>
 
       <!-- ══ ROW 6: MLPipeline ══ -->
-      <rect x="280" y="578" width="170" height="52" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.6"/>
-      <text x="365" y="598" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7a2010">MLPipeline</text>
-      <text x="365" y="613" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c05040">Runs ML model training</text>
+      <rect x="188" y="728" width="198" height="58" rx="8" fill="#f5e0dc" stroke="#c05040" stroke-width="1.6"/>
+      <text x="287" y="752" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#7a2010">MLPipeline</text>
+      <text x="287" y="770" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#c05040">Runs ML model training</text>
 
       <!-- MLPipeline → ML results → Dashboard -->
-      <line x1="365" y1="630" x2="365" y2="698" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="373" y="667" font-family="DM Sans,sans-serif" font-size="9" fill="#777">ML results</text>
+      <line x1="287" y1="786" x2="287" y2="848" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="295" y="820" font-family="DM Sans,sans-serif" font-size="9" fill="#888">ML results</text>
 
-      <!-- Labeled data dashed line from SentimentTopicLabeler down to Dashboard (left side) -->
-      <line x1="280" y1="494" x2="180" y2="494" stroke="#888" stroke-width="1.1" stroke-dasharray="5,3"/>
-      <line x1="180" y1="494" x2="180" y2="724" stroke="#888" stroke-width="1.1" stroke-dasharray="5,3"/>
-      <line x1="180" y1="724" x2="280" y2="724" stroke="#888" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#ca-dash)"/>
-      <text x="148" y="620" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888" transform="rotate(-90,148,620)">labeled data</text>
+      <!-- labeled data dashed arc left side -->
+      <line x1="188" y1="627" x2="108" y2="627" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3"/>
+      <line x1="108" y1="627" x2="108" y2="877" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3"/>
+      <line x1="108" y1="877" x2="188" y2="877" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#ca-dash)"/>
+      <text x="78" y="755" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#999" transform="rotate(-90,78,755)">labeled data</text>
 
-      <!-- ══ ROW 7: Dashboard + Visualization + UserAuthenticator ══ -->
-      <rect x="280" y="698" width="170" height="52" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.6"/>
-      <text x="365" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#0f3d7a">Dashboard</text>
-      <text x="365" y="733" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#2a6fad">Displays results &amp; labels</text>
+      <!-- ══ ROW 7: Dashboard + Visualization + UserAuthentication ══ -->
+      <rect x="188" y="848" width="198" height="58" rx="8" fill="#dde8f6" stroke="#2a6fad" stroke-width="1.6"/>
+      <text x="287" y="872" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#0f3d7a">Dashboard</text>
+      <text x="287" y="890" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#2a6fad">Displays results &amp; labels</text>
 
       <!-- Dashboard → feeds → Visualization -->
-      <line x1="450" y1="724" x2="510" y2="724" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="480" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#777">feeds</text>
+      <line x1="386" y1="877" x2="450" y2="877" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="418" y="870" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888">feeds</text>
 
-      <rect x="510" y="698" width="120" height="52" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.6"/>
-      <text x="570" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#0f3d7a">Visualization</text>
-      <text x="570" y="733" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#2a6fad">Filters &amp; displays</text>
+      <!-- Visualization (blue) -->
+      <rect x="450" y="848" width="155" height="58" rx="8" fill="#dde8f6" stroke="#2a6fad" stroke-width="1.6"/>
+      <text x="527" y="872" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#0f3d7a">Visualization</text>
+      <text x="527" y="890" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#2a6fad">Filters &amp; displays</text>
 
-      <!-- Visualization ← grants access ← UserAuthenticator -->
-      <line x1="660" y1="724" x2="630" y2="724" stroke="#555" stroke-width="1.3" marker-end="url(#ca)"/>
-      <text x="645" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#777">grants access</text>
+      <!-- → grants access → UserAuthentication -->
+      <line x1="605" y1="877" x2="648" y2="877" stroke="#888" stroke-width="1.2" marker-end="url(#ca)"/>
+      <text x="626" y="870" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#888">grants access</text>
 
-      <rect x="660" y="698" width="100" height="52" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.4"/>
-      <text x="710" y="718" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#0f3d7a">UserAuthenticator</text>
-      <text x="710" y="733" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#2a6fad">User access</text>
+      <!-- UserAuthentication (blue) -->
+      <rect x="648" y="848" width="188" height="58" rx="8" fill="#dde8f6" stroke="#2a6fad" stroke-width="1.4"/>
+      <text x="742" y="872" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#0f3d7a">UserAuthentication</text>
+      <text x="742" y="890" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#2a6fad">User access</text>
 
       <!-- ══ LEGEND ══ -->
-      <rect x="20" y="830" width="740" height="70" rx="6" fill="#fafafa" stroke="#dde" stroke-width="1"/>
-      <!-- Data ingestion -->
-      <rect x="36" y="851" width="14" height="14" rx="3" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.2"/>
-      <text x="56" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Data ingestion</text>
-      <!-- Processing -->
-      <rect x="155" y="851" width="14" height="14" rx="3" fill="#e0f0ef" stroke="#006666" stroke-width="1.2"/>
-      <text x="175" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Processing</text>
-      <!-- ML / labeling -->
-      <rect x="260" y="851" width="14" height="14" rx="3" fill="#fae8e4" stroke="#c05040" stroke-width="1.2"/>
-      <text x="280" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">ML / labeling</text>
-      <!-- Output / UI -->
-      <rect x="370" y="851" width="14" height="14" rx="3" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.2"/>
-      <text x="390" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Output / UI</text>
-      <!-- Monitoring -->
-      <rect x="466" y="851" width="14" height="14" rx="3" fill="#fdf3de" stroke="#b07a10" stroke-width="1.2"/>
-      <text x="486" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Monitoring</text>
-      <!-- Infrastructure -->
-      <rect x="564" y="851" width="14" height="14" rx="3" fill="#f2f2f2" stroke="#888" stroke-width="1.2"/>
-      <text x="584" y="863" font-family="DM Sans,sans-serif" font-size="10" fill="#444">Infrastructure</text>
+      <rect x="30" y="928" width="920" height="24" rx="5" fill="#f0ede8" stroke="#ccc" stroke-width="0.8"/>
+      <rect x="46" y="934" width="11" height="11" rx="2" fill="#eae7f8" stroke="#6c63c9" stroke-width="1"/>
+      <text x="62" y="944" font-family="DM Sans,sans-serif" font-size="9.5" fill="#444">Data ingestion</text>
+      <rect x="170" y="934" width="11" height="11" rx="2" fill="#dceeed" stroke="#006666" stroke-width="1"/>
+      <text x="186" y="944" font-family="DM Sans,sans-serif" font-size="9.5" fill="#444">Processing</text>
+      <rect x="280" y="934" width="11" height="11" rx="2" fill="#f5e0dc" stroke="#c05040" stroke-width="1"/>
+      <text x="296" y="944" font-family="DM Sans,sans-serif" font-size="9.5" fill="#444">ML / labeling</text>
+      <rect x="400" y="934" width="11" height="11" rx="2" fill="#dde8f6" stroke="#2a6fad" stroke-width="1"/>
+      <text x="416" y="944" font-family="DM Sans,sans-serif" font-size="9.5" fill="#444">Output / UI</text>
+      <rect x="506" y="934" width="11" height="11" rx="2" fill="#fdf0d0" stroke="#b07a10" stroke-width="1"/>
+      <text x="522" y="944" font-family="DM Sans,sans-serif" font-size="9.5" fill="#444">Monitoring</text>
+      <rect x="614" y="934" width="11" height="11" rx="2" fill="#f0f0ee" stroke="#aaa" stroke-width="1"/>
+      <text x="630" y="944" font-family="DM Sans,sans-serif" font-size="9.5" fill="#444">Infrastructure</text>
     </svg>
 
     <div class="callout">
@@ -297,7 +292,7 @@
     <h2>Component diagram</h2>
     <p class="diagram-desc">The system is organized into five architectural layers. Each layer has bounded responsibilities and passes data to the next through well-defined interfaces.</p>
 
-    <svg viewBox="0 0 760 900" xmlns="http://www.w3.org/2000/svg" class="diagram-svg diagram-svg--light">
+    <svg viewBox="0 0 1000 920" xmlns="http://www.w3.org/2000/svg" class="diagram-svg diagram-svg--light">
       <defs>
         <marker id="la" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
           <path d="M0,0 L7,3.5 L0,7 Z" fill="#555"/>
@@ -307,147 +302,159 @@
         </marker>
       </defs>
 
-      <!-- ══ LAYER 1: Data ingestion ══ -->
-      <rect x="18" y="16" width="724" height="158" rx="10" fill="none" stroke="#6c63c9" stroke-width="1.8"/>
-      <text x="36" y="40" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#4a3ab0">Data ingestion layer</text>
+      <rect x="0" y="0" width="1000" height="920" fill="#f8f5f0"/>
+
+      <!-- ══════════════════════════════════
+           LAYER 1: Data ingestion
+      ══════════════════════════════════ -->
+      <rect x="18" y="16" width="964" height="148" rx="12" fill="#eeebf8" stroke="#6c63c9" stroke-width="1.8"/>
+      <text x="38" y="44" font-family="DM Sans,sans-serif" font-size="14" font-weight="700" fill="#4a3ab0">Data ingestion layer</text>
 
       <!-- NightlyRefresh -->
-      <rect x="36" y="58" width="140" height="58" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.4"/>
-      <text x="106" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#3d2d9e">NightlyRefresh</text>
-      <text x="106" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#5a4faa">Scheduled trigger</text>
+      <rect x="48" y="62" width="170" height="68" rx="8" fill="#e4e0f6" stroke="#6c63c9" stroke-width="1.5"/>
+      <text x="133" y="88" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#3d2d9e">NightlyRefresh</text>
+      <text x="133" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#5a4faa">Scheduled trigger</text>
 
-      <line x1="176" y1="87" x2="210" y2="87" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+      <line x1="218" y1="96" x2="258" y2="96" stroke="#666" stroke-width="1.3" marker-end="url(#la)"/>
 
       <!-- ReviewScrapper -->
-      <rect x="210" y="58" width="140" height="58" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.4"/>
-      <text x="280" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#3d2d9e">ReviewScrapper</text>
-      <text x="280" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#5a4faa">Collects raw reviews</text>
+      <rect x="258" y="62" width="170" height="68" rx="8" fill="#e4e0f6" stroke="#6c63c9" stroke-width="1.5"/>
+      <text x="343" y="88" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#3d2d9e">ReviewScrapper</text>
+      <text x="343" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#5a4faa">Collects raw reviews</text>
 
-      <line x1="350" y1="87" x2="384" y2="87" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+      <line x1="428" y1="96" x2="468" y2="96" stroke="#666" stroke-width="1.3" marker-end="url(#la)"/>
 
       <!-- RawReviewData -->
-      <rect x="384" y="58" width="140" height="58" rx="8" fill="#ede9f8" stroke="#6c63c9" stroke-width="1.4"/>
-      <text x="454" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#3d2d9e">RawReviewData</text>
-      <text x="454" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#5a4faa">Scraped reviews</text>
+      <rect x="468" y="62" width="170" height="68" rx="8" fill="#e4e0f6" stroke="#6c63c9" stroke-width="1.5"/>
+      <text x="553" y="88" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#3d2d9e">RawReviewData</text>
+      <text x="553" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#5a4faa">Scraped reviews</text>
 
-      <line x1="524" y1="87" x2="558" y2="87" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+      <line x1="638" y1="96" x2="678" y2="96" stroke="#666" stroke-width="1.3" marker-end="url(#la)"/>
 
-      <!-- OutageDetect -->
-      <rect x="558" y="58" width="160" height="58" rx="8" fill="#fdf3de" stroke="#b07a10" stroke-width="1.4"/>
-      <text x="638" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#7a5200">OutageDetect.</text>
-      <text x="638" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#9a6800">Monitors outages</text>
+      <!-- OutageDetection -->
+      <rect x="678" y="62" width="188" height="68" rx="8" fill="#fce9b0" stroke="#b07a10" stroke-width="1.5"/>
+      <text x="772" y="88" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#7a5200">OutageDetection</text>
+      <text x="772" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#9a6800">Monitors outages</text>
 
-      <!-- ── inter-layer arrows ── -->
-      <!-- raw reviews solid arrow down -->
-      <line x1="380" y1="174" x2="380" y2="214" stroke="#555" stroke-width="1.3" marker-end="url(#la)"/>
-      <text x="388" y="197" font-family="DM Sans,sans-serif" font-size="9" fill="#666">raw reviews</text>
+      <!-- ── inter-layer connectors ── -->
+      <!-- raw reviews solid down from RawReviewData area -->
+      <line x1="650" y1="164" x2="650" y2="210" stroke="#777" stroke-width="1.3" marker-end="url(#la)"/>
+      <text x="658" y="190" font-family="DM Sans,sans-serif" font-size="9.5" fill="#777">raw reviews</text>
 
-      <!-- triggers prediction dashed arrow -->
-      <line x1="638" y1="174" x2="638" y2="214" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#la-dash)"/>
-      <text x="646" y="197" font-family="DM Sans,sans-serif" font-size="9" fill="#999">triggers prediction</text>
+      <!-- triggers prediction dashed from OutageDetection down -->
+      <line x1="350" y1="164" x2="350" y2="210" stroke="#aaa" stroke-width="1.1" stroke-dasharray="6,3" marker-end="url(#la-dash)"/>
+      <text x="180" y="190" font-family="DM Sans,sans-serif" font-size="9.5" fill="#aaa">triggers prediction</text>
 
-      <!-- ══ LAYER 2: Processing ══ -->
-      <rect x="18" y="214" width="724" height="148" rx="10" fill="none" stroke="#006666" stroke-width="1.8"/>
-      <text x="36" y="238" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#004444">Processing layer</text>
+      <!-- ══════════════════════════════════
+           LAYER 2: Processing
+      ══════════════════════════════════ -->
+      <rect x="18" y="210" width="964" height="168" rx="12" fill="#d8f0ec" stroke="#006666" stroke-width="1.8"/>
+      <text x="38" y="238" font-family="DM Sans,sans-serif" font-size="14" font-weight="700" fill="#004444">Processing layer</text>
 
       <!-- PredictiveReview -->
-      <rect x="36" y="254" width="155" height="58" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.4"/>
-      <text x="113" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#004444">PredictiveReview</text>
-      <text x="113" y="291" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#006666">Predicts category</text>
+      <rect x="48" y="258" width="185" height="68" rx="8" fill="#b8e0d8" stroke="#006666" stroke-width="1.5"/>
+      <text x="140" y="284" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#004444">PredictiveReview</text>
+      <text x="140" y="304" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#006666">Predicts category</text>
 
-      <line x1="191" y1="283" x2="224" y2="283" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+      <line x1="233" y1="292" x2="273" y2="292" stroke="#666" stroke-width="1.3" marker-end="url(#la)"/>
 
-      <!-- ReviewCategor. -->
-      <rect x="224" y="254" width="140" height="58" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.4"/>
-      <text x="294" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#004444">ReviewCategor.</text>
-      <text x="294" y="291" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#006666">Labels by type</text>
+      <!-- ReviewCategorization -->
+      <rect x="273" y="258" width="195" height="68" rx="8" fill="#b8e0d8" stroke="#006666" stroke-width="1.5"/>
+      <text x="370" y="284" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#004444">ReviewCategorization</text>
+      <text x="370" y="304" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#006666">Labels by type</text>
 
-      <line x1="364" y1="283" x2="398" y2="283" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+      <line x1="468" y1="292" x2="508" y2="292" stroke="#666" stroke-width="1.3" marker-end="url(#la)"/>
 
       <!-- DataSplitting -->
-      <rect x="398" y="254" width="140" height="58" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.4"/>
-      <text x="468" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#004444">DataSplitting</text>
-      <text x="468" y="291" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#006666">Splits by substance</text>
+      <rect x="508" y="258" width="175" height="68" rx="8" fill="#b8e0d8" stroke="#006666" stroke-width="1.5"/>
+      <text x="595" y="284" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#004444">DataSplitting</text>
+      <text x="595" y="304" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#006666">Splits by substance</text>
 
-      <line x1="538" y1="283" x2="572" y2="283" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+      <line x1="683" y1="292" x2="723" y2="292" stroke="#666" stroke-width="1.3" marker-end="url(#la)"/>
 
       <!-- TextCleaning -->
-      <rect x="572" y="254" width="148" height="58" rx="8" fill="#e0f0ef" stroke="#006666" stroke-width="1.4"/>
-      <text x="646" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#004444">TextCleaning</text>
-      <text x="646" y="291" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#006666">Cleans &amp; normalizes</text>
+      <rect x="723" y="258" width="175" height="68" rx="8" fill="#b8e0d8" stroke="#006666" stroke-width="1.5"/>
+      <text x="810" y="284" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#004444">TextCleaning</text>
+      <text x="810" y="304" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#006666">Cleans &amp; normalizes</text>
 
       <!-- processed data arrow down -->
-      <line x1="380" y1="362" x2="380" y2="402" stroke="#555" stroke-width="1.3" marker-end="url(#la)"/>
-      <text x="388" y="385" font-family="DM Sans,sans-serif" font-size="9" fill="#666">processed data</text>
+      <line x1="500" y1="378" x2="500" y2="424" stroke="#777" stroke-width="1.3" marker-end="url(#la)"/>
+      <text x="508" y="404" font-family="DM Sans,sans-serif" font-size="9.5" fill="#777">processed data</text>
 
-      <!-- ══ LAYER 3: ML & labeling ══ -->
-      <rect x="18" y="402" width="724" height="148" rx="10" fill="none" stroke="#c05040" stroke-width="1.8"/>
-      <text x="36" y="426" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#7a2010">ML &amp; labeling layer</text>
+      <!-- ══════════════════════════════════
+           LAYER 3: ML & labeling
+      ══════════════════════════════════ -->
+      <rect x="18" y="424" width="964" height="178" rx="12" fill="#fbe8e2" stroke="#c05040" stroke-width="1.8"/>
+      <text x="38" y="452" font-family="DM Sans,sans-serif" font-size="14" font-weight="700" fill="#7a2010">ML &amp; labeling layer</text>
 
       <!-- SentimentLabeler -->
-      <rect x="140" y="446" width="165" height="58" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.4"/>
-      <text x="222" y="466" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#7a2010">SentimentLabeler</text>
-      <text x="222" y="483" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#c05040">Sentiment &amp; topics</text>
+      <rect x="228" y="472" width="200" height="68" rx="8" fill="#f0c0b0" stroke="#c05040" stroke-width="1.5"/>
+      <text x="328" y="498" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#7a2010">SentimentLabeler</text>
+      <text x="328" y="518" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#c05040">Sentiment &amp; topics</text>
 
-      <line x1="305" y1="475" x2="340" y2="475" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+      <line x1="428" y1="506" x2="472" y2="506" stroke="#666" stroke-width="1.3" marker-end="url(#la)"/>
 
       <!-- MLPipeline -->
-      <rect x="340" y="446" width="155" height="58" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.4"/>
-      <text x="417" y="466" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#7a2010">MLPipeline</text>
-      <text x="417" y="483" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#c05040">Model training</text>
+      <rect x="472" y="472" width="195" height="68" rx="8" fill="#f0c0b0" stroke="#c05040" stroke-width="1.5"/>
+      <text x="569" y="498" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#7a2010">MLPipeline</text>
+      <text x="569" y="518" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#c05040">Model training</text>
 
-      <!-- ML results arrow -->
-      <line x1="417" y1="504" x2="417" y2="538" stroke="#555" stroke-width="1.1"/>
-      <line x1="380" y1="538" x2="380" y2="562" stroke="#555" stroke-width="1.3" marker-end="url(#la)"/>
-      <line x1="380" y1="538" x2="417" y2="538" stroke="#555" stroke-width="1.1"/>
-      <text x="430" y="525" font-family="DM Sans,sans-serif" font-size="9" fill="#666">ML results</text>
+      <!-- ML results arrow down from MLPipeline -->
+      <line x1="569" y1="540" x2="569" y2="576" stroke="#777" stroke-width="1.1"/>
+      <line x1="500" y1="576" x2="500" y2="622" stroke="#777" stroke-width="1.3" marker-end="url(#la)"/>
+      <line x1="500" y1="576" x2="569" y2="576" stroke="#777" stroke-width="1.1"/>
+      <text x="580" y="562" font-family="DM Sans,sans-serif" font-size="9.5" fill="#777">ML results</text>
 
-      <!-- labeled data dashed left side -->
-      <line x1="140" y1="475" x2="80" y2="475" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3"/>
-      <line x1="80" y1="475" x2="80" y2="588" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3"/>
-      <line x1="80" y1="588" x2="130" y2="588" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#la-dash)"/>
-      <text x="56" y="535" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#999" transform="rotate(-90,56,535)">labeled data</text>
+      <!-- labeled data dashed arc -->
+      <line x1="228" y1="506" x2="148" y2="506" stroke="#bbb" stroke-width="1.1" stroke-dasharray="6,3"/>
+      <line x1="148" y1="506" x2="148" y2="650" stroke="#bbb" stroke-width="1.1" stroke-dasharray="6,3"/>
+      <line x1="148" y1="650" x2="218" y2="650" stroke="#bbb" stroke-width="1.1" stroke-dasharray="6,3" marker-end="url(#la-dash)"/>
+      <text x="118" y="582" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#bbb" transform="rotate(-90,118,582)">labeled data</text>
 
-      <!-- ══ LAYER 4: Output & UI ══ -->
-      <rect x="18" y="562" width="724" height="148" rx="10" fill="none" stroke="#2a6fad" stroke-width="1.8"/>
-      <text x="36" y="586" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#0f3d7a">Output &amp; UI layer</text>
+      <!-- ══════════════════════════════════
+           LAYER 4: Output & UI
+      ══════════════════════════════════ -->
+      <rect x="18" y="622" width="964" height="178" rx="12" fill="#dce8f6" stroke="#2a6fad" stroke-width="1.8"/>
+      <text x="38" y="650" font-family="DM Sans,sans-serif" font-size="14" font-weight="700" fill="#0f3d7a">Output &amp; UI layer</text>
 
       <!-- Dashboard -->
-      <rect x="130" y="604" width="155" height="58" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.4"/>
-      <text x="207" y="624" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0f3d7a">Dashboard</text>
-      <text x="207" y="641" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#2a6fad">Results &amp; labels</text>
+      <rect x="218" y="668" width="195" height="68" rx="8" fill="#b0c8e8" stroke="#2a6fad" stroke-width="1.5"/>
+      <text x="315" y="694" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#0f3d7a">Dashboard</text>
+      <text x="315" y="714" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#2a6fad">Results &amp; labels</text>
 
-      <line x1="285" y1="633" x2="320" y2="633" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+      <line x1="413" y1="702" x2="453" y2="702" stroke="#666" stroke-width="1.3" marker-end="url(#la)"/>
 
       <!-- Visualization -->
-      <rect x="320" y="604" width="155" height="58" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.4"/>
-      <text x="397" y="624" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0f3d7a">Visualization</text>
-      <text x="397" y="641" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#2a6fad">Filters &amp; displays</text>
+      <rect x="453" y="668" width="195" height="68" rx="8" fill="#b0c8e8" stroke="#2a6fad" stroke-width="1.5"/>
+      <text x="550" y="694" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#0f3d7a">Visualization</text>
+      <text x="550" y="714" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#2a6fad">Filters &amp; displays</text>
 
-      <!-- UserAuthenticator → Visualization -->
-      <line x1="510" y1="633" x2="475" y2="633" stroke="#555" stroke-width="1.2" marker-end="url(#la)"/>
+      <!-- UserAuthenticator → Visualization (arrow points left into Visualization) -->
+      <line x1="688" y1="702" x2="648" y2="702" stroke="#666" stroke-width="1.3" marker-end="url(#la)"/>
 
       <!-- UserAuthenticator -->
-      <rect x="510" y="604" width="170" height="58" rx="8" fill="#e5eef8" stroke="#2a6fad" stroke-width="1.4"/>
-      <text x="595" y="624" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0f3d7a">UserAuthenticator</text>
-      <text x="595" y="641" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#2a6fad">User access</text>
+      <rect x="688" y="668" width="210" height="68" rx="8" fill="#b0c8e8" stroke="#2a6fad" stroke-width="1.5"/>
+      <text x="793" y="694" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#0f3d7a">UserAuthenticator</text>
+      <text x="793" y="714" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#2a6fad">User access</text>
 
-      <!-- dashed down from output layer to infrastructure -->
-      <line x1="380" y1="710" x2="380" y2="730" stroke="#999" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#la-dash)"/>
+      <!-- dashed line from output layer down to infrastructure -->
+      <line x1="500" y1="800" x2="500" y2="832" stroke="#bbb" stroke-width="1.1" stroke-dasharray="6,3" marker-end="url(#la-dash)"/>
 
-      <!-- ══ LAYER 5: Infrastructure ══ -->
-      <rect x="18" y="730" width="724" height="128" rx="10" fill="none" stroke="#888" stroke-width="1.6"/>
-      <text x="36" y="754" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#444">Infrastructure</text>
+      <!-- ══════════════════════════════════
+           LAYER 5: Infrastructure
+      ══════════════════════════════════ -->
+      <rect x="18" y="832" width="964" height="72" rx="12" fill="#f0ede8" stroke="#aaa" stroke-width="1.6"/>
+      <text x="38" y="856" font-family="DM Sans,sans-serif" font-size="14" font-weight="700" fill="#444">Infrastructure</text>
 
       <!-- OnSiteStorage -->
-      <rect x="160" y="768" width="155" height="58" rx="8" fill="#f2f2f2" stroke="#888" stroke-width="1.4"/>
-      <text x="237" y="788" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="600" fill="#333">OnSiteStorage</text>
-      <text x="237" y="805" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#666">Local data store</text>
+      <rect x="248" y="842" width="180" height="52" rx="8" fill="#e8e4e0" stroke="#aaa" stroke-width="1.4"/>
+      <text x="338" y="863" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#333">OnSiteStorage</text>
+      <text x="338" y="882" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#666">Local data store</text>
 
       <!-- TechnicianAuth -->
-      <rect x="375" y="768" width="155" height="58" rx="8" fill="#fae8e4" stroke="#c05040" stroke-width="1.4"/>
-      <text x="452" y="788" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="700" fill="#7a2010">TechnicianAuth</text>
-      <text x="452" y="805" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#c05040">Technician access</text>
+      <rect x="468" y="842" width="180" height="52" rx="8" fill="#f0c0b0" stroke="#c05040" stroke-width="1.4"/>
+      <text x="558" y="863" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="700" fill="#7a2010">TechnicianAuth</text>
+      <text x="558" y="882" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#c05040">Technician access</text>
     </svg>
 
     <div class="callout">
